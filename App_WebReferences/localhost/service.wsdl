@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateObject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TableName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fieldname" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="datatype" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="primaryKey" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateObjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateObjectResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteTableResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteField">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FieldID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFieldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteFieldResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddField">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddFieldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddFieldResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadDataResult" type="tns:TenantTableInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TenantTableInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TableNameProperty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldNamesProperty" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldValuesProperty" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadDataWithGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GUID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDataWithGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadDataWithGUIDResult" type="tns:TenantTableInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTables">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablesResult" type="tns:ArrayOfTable" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTable">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Table">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrgIDProperty" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ObjIDProperty" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TNameProperty" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadField">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadFieldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadFieldResult" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="tns:Field" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Field">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrgIDProperty" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ObjIDProperty" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldIDProperty" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldNameProperty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldDataType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AccountRegistration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AccountRegistrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AccountRegistrationResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRelationship">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RefObjID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FieldID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRelationshipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertRelationshipResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTablesWithPrimaryKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Datatype" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTablesWithPrimaryKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTablesWithPrimaryKeyResult" type="tns:ArrayOfTable" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcurrentindex">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getcurrentindexResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getcurrentindexResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OrgID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ObjID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="value" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertDataResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateObjectSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateObject" />
+  </wsdl:message>
+  <wsdl:message name="CreateObjectSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTableSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTable" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTableSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFieldSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteField" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFieldSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddFieldSoapIn">
+    <wsdl:part name="parameters" element="tns:AddField" />
+  </wsdl:message>
+  <wsdl:message name="AddFieldSoapOut">
+    <wsdl:part name="parameters" element="tns:AddFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadData" />
+  </wsdl:message>
+  <wsdl:message name="ReadDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadDataWithGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadDataWithGUID" />
+  </wsdl:message>
+  <wsdl:message name="ReadDataWithGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadDataWithGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTables" />
+  </wsdl:message>
+  <wsdl:message name="GetTablesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadFieldSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadField" />
+  </wsdl:message>
+  <wsdl:message name="ReadFieldSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="AccountRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:AccountRegistration" />
+  </wsdl:message>
+  <wsdl:message name="AccountRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:AccountRegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRelationshipSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRelationship" />
+  </wsdl:message>
+  <wsdl:message name="InsertRelationshipSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRelationshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTablesWithPrimaryKeySoapIn">
+    <wsdl:part name="parameters" element="tns:getTablesWithPrimaryKey" />
+  </wsdl:message>
+  <wsdl:message name="getTablesWithPrimaryKeySoapOut">
+    <wsdl:part name="parameters" element="tns:getTablesWithPrimaryKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="getcurrentindexSoapIn">
+    <wsdl:part name="parameters" element="tns:getcurrentindex" />
+  </wsdl:message>
+  <wsdl:message name="getcurrentindexSoapOut">
+    <wsdl:part name="parameters" element="tns:getcurrentindexResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertDataSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertData" />
+  </wsdl:message>
+  <wsdl:message name="InsertDataSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="CreateObject">
+      <wsdl:input message="tns:CreateObjectSoapIn" />
+      <wsdl:output message="tns:CreateObjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <wsdl:input message="tns:DeleteTableSoapIn" />
+      <wsdl:output message="tns:DeleteTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteField">
+      <wsdl:input message="tns:DeleteFieldSoapIn" />
+      <wsdl:output message="tns:DeleteFieldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddField">
+      <wsdl:input message="tns:AddFieldSoapIn" />
+      <wsdl:output message="tns:AddFieldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadData">
+      <wsdl:input message="tns:ReadDataSoapIn" />
+      <wsdl:output message="tns:ReadDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDataWithGUID">
+      <wsdl:input message="tns:ReadDataWithGUIDSoapIn" />
+      <wsdl:output message="tns:ReadDataWithGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <wsdl:input message="tns:GetTablesSoapIn" />
+      <wsdl:output message="tns:GetTablesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadField">
+      <wsdl:input message="tns:ReadFieldSoapIn" />
+      <wsdl:output message="tns:ReadFieldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountRegistration">
+      <wsdl:input message="tns:AccountRegistrationSoapIn" />
+      <wsdl:output message="tns:AccountRegistrationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRelationship">
+      <wsdl:input message="tns:InsertRelationshipSoapIn" />
+      <wsdl:output message="tns:InsertRelationshipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTablesWithPrimaryKey">
+      <wsdl:input message="tns:getTablesWithPrimaryKeySoapIn" />
+      <wsdl:output message="tns:getTablesWithPrimaryKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getcurrentindex">
+      <wsdl:input message="tns:getcurrentindexSoapIn" />
+      <wsdl:output message="tns:getcurrentindexSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertData">
+      <wsdl:input message="tns:InsertDataSoapIn" />
+      <wsdl:output message="tns:InsertDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateObject">
+      <soap:operation soapAction="http://tempuri.org/CreateObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <soap:operation soapAction="http://tempuri.org/DeleteTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteField">
+      <soap:operation soapAction="http://tempuri.org/DeleteField" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddField">
+      <soap:operation soapAction="http://tempuri.org/AddField" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadData">
+      <soap:operation soapAction="http://tempuri.org/ReadData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDataWithGUID">
+      <soap:operation soapAction="http://tempuri.org/ReadDataWithGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <soap:operation soapAction="http://tempuri.org/GetTables" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadField">
+      <soap:operation soapAction="http://tempuri.org/ReadField" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountRegistration">
+      <soap:operation soapAction="http://tempuri.org/AccountRegistration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRelationship">
+      <soap:operation soapAction="http://tempuri.org/InsertRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTablesWithPrimaryKey">
+      <soap:operation soapAction="http://tempuri.org/getTablesWithPrimaryKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcurrentindex">
+      <soap:operation soapAction="http://tempuri.org/getcurrentindex" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertData">
+      <soap:operation soapAction="http://tempuri.org/InsertData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateObject">
+      <soap12:operation soapAction="http://tempuri.org/CreateObject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <soap12:operation soapAction="http://tempuri.org/DeleteTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteField">
+      <soap12:operation soapAction="http://tempuri.org/DeleteField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddField">
+      <soap12:operation soapAction="http://tempuri.org/AddField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadData">
+      <soap12:operation soapAction="http://tempuri.org/ReadData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDataWithGUID">
+      <soap12:operation soapAction="http://tempuri.org/ReadDataWithGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <soap12:operation soapAction="http://tempuri.org/GetTables" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadField">
+      <soap12:operation soapAction="http://tempuri.org/ReadField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountRegistration">
+      <soap12:operation soapAction="http://tempuri.org/AccountRegistration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRelationship">
+      <soap12:operation soapAction="http://tempuri.org/InsertRelationship" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTablesWithPrimaryKey">
+      <soap12:operation soapAction="http://tempuri.org/getTablesWithPrimaryKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getcurrentindex">
+      <soap12:operation soapAction="http://tempuri.org/getcurrentindex" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertData">
+      <soap12:operation soapAction="http://tempuri.org/InsertData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://localhost/SaaSDBLayerServices/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://localhost/SaaSDBLayerServices/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
